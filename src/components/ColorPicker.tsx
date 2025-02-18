@@ -1,5 +1,6 @@
 "use client";
 
+import { usePaintContext } from "@/contexts/PaintContext";
 import { useEffect, useState } from "react";
 
 type Coordinates = {
@@ -10,8 +11,9 @@ type Coordinates = {
 export default function ColorPicker() {
   const [coordinates, setCoordinates] = useState<Coordinates>({ x: 0, y: 0 });
   const [isOpen, setIsOpen] = useState(false);
+  const paintContext = usePaintContext();
 
-  const handleColorPicker = (e: MouseEvent) => {
+  const handleOpen = (e: MouseEvent) => {
     e.preventDefault();
     setCoordinates({
       x: e.clientX,
@@ -24,11 +26,15 @@ export default function ColorPicker() {
     setIsOpen(false);
   };
 
+  const handleColorPick = ({ color }: { color: string }) => {
+    paintContext.setCurrentColor(color);
+  };
+
   useEffect(() => {
-    document.addEventListener("contextmenu", handleColorPicker);
+    document.addEventListener("contextmenu", handleOpen);
     document.addEventListener("click", handleClose);
     return () => {
-      document.removeEventListener("contextmenu", handleColorPicker);
+      document.removeEventListener("contextmenu", handleOpen);
       document.removeEventListener("click", handleClose);
     };
   }, []);
@@ -39,9 +45,14 @@ export default function ColorPicker() {
         className="flex absolute"
         style={{ top: coordinates.y, left: coordinates.x }}
       >
-        <button className="h-5 w-5 bg-red-500" />
-        <button className="h-5 w-5 bg-blue-500" />
-        <button className="h-5 w-5 bg-green-500" />
+        {paintContext.availableColors.map((color) => (
+          <button
+            onClick={() => handleColorPick({ color })}
+            key={color}
+            className="h-5 w-5"
+            style={{ backgroundColor: color }}
+          />
+        ))}
       </div>
     )
   );
