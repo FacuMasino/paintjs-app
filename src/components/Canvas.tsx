@@ -30,7 +30,7 @@ export default function Canvas() {
   return (
     <>
       <div
-        className="grid"
+        className="grid border border-black"
         style={{
           gridTemplateColumns: `repeat(100, ${pixelSize}px)`,
           gridAutoRows: `${pixelSize}px`,
