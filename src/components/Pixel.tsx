@@ -24,7 +24,7 @@ export default function Pixel({ defaultColor }: { defaultColor: string }) {
     <button
       onClick={handlePaint}
       onMouseOver={handleMouseMove}
-      className="border border-black"
+      className="border border-black transition-colors duration-150"
       style={{ backgroundColor: isPainted ? pixelColor : defaultColor }}
     />
   );
