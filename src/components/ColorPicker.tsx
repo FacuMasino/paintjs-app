@@ -1,5 +1,6 @@
 "use client";
 
+import Pippete from "@/assets/Pippete";
 import { usePaintContext } from "@/contexts/PaintContext";
 import { useEffect, useState } from "react";
 
@@ -41,7 +42,7 @@ export default function ColorPicker() {
   return (
     isOpen && (
       <div
-        className="absolute flex gap-1 bg-white p-1 border-2 border-black drop-shadow-lg"
+        className="absolute flex gap-1 bg-white p-1 border-2 -m-1 border-black drop-shadow-lg"
         style={{ top: coordinates.y, left: coordinates.x }}
         onMouseLeave={handleClose}
       >
@@ -49,10 +50,22 @@ export default function ColorPicker() {
           <button
             onClick={() => handleColorPick({ color })}
             key={color}
-            className="h-5 w-5"
+            className="h-7 w-7 rounded"
             style={{ backgroundColor: color }}
           />
         ))}
+        <button className="h-7 w-7 flex items-center rounded border-2 border-black">
+          <Pippete className="w-6 h-6" />
+          <input
+            type="color"
+            className="absolute w-7 h-7 opacity-0"
+            defaultValue="#000000"
+            onMouseLeave={(e) => {
+              if (e.currentTarget.value != "#000000")
+                handleColorPick({ color: e.currentTarget.value });
+            }}
+          />
+        </button>
       </div>
     )
   );
