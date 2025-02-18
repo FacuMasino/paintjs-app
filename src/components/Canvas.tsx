@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Pixel from "./Pixel";
+import ColorPicker from "./ColorPicker";
 
 type WindowSize = {
   width: number;
@@ -29,6 +30,7 @@ export default function Canvas() {
 
   return (
     <>
+      <ColorPicker />
       <div
         className="grid border border-black"
         style={{
