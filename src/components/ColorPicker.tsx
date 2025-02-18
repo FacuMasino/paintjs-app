@@ -28,22 +28,22 @@ export default function ColorPicker() {
 
   const handleColorPick = ({ color }: { color: string }) => {
     paintContext.setCurrentColor(color);
+    handleClose();
   };
 
   useEffect(() => {
     document.addEventListener("contextmenu", handleOpen);
-    document.addEventListener("click", handleClose);
     return () => {
       document.removeEventListener("contextmenu", handleOpen);
-      document.removeEventListener("click", handleClose);
     };
   }, []);
 
   return (
     isOpen && (
       <div
-        className="flex absolute"
+        className="absolute flex gap-1 bg-white p-1 border-2 border-black drop-shadow-lg"
         style={{ top: coordinates.y, left: coordinates.x }}
+        onMouseLeave={handleClose}
       >
         {paintContext.availableColors.map((color) => (
           <button

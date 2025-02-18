@@ -35,7 +35,7 @@ export default function Canvas() {
       <div
         className="grid border border-black"
         style={{
-          gridTemplateColumns: `repeat(100, ${pixelSize}px)`,
+          gridTemplateColumns: `repeat(${TOTAL_PIXELS}, ${pixelSize}px)`,
           gridAutoRows: `${pixelSize}px`,
         }}
       >
