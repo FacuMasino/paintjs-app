@@ -42,6 +42,8 @@ export default function ColorPicker() {
   return (
     isOpen && (
       <div
+        role="group"
+        aria-label="Selector de color"
         className="absolute flex gap-1 bg-white p-1 border-2 -m-1 border-black rounded drop-shadow-lg"
         style={{ top: coordinates.y, left: coordinates.x }}
         onMouseLeave={handleClose}
@@ -54,10 +56,14 @@ export default function ColorPicker() {
             style={{ backgroundColor: color }}
           />
         ))}
-        <button className="h-7 w-7 flex items-center rounded border-2 border-black hover:scale-105 transition-transform">
+        <button
+          aria-label="Abre el selector de color pesonalizado"
+          className="h-7 w-7 flex items-center rounded border-2 border-black hover:scale-105 transition-transform"
+        >
           <Pippete className="w-6 h-6" />
           <input
             type="color"
+            aria-label="Selector de color personalizado"
             className="absolute w-7 h-7 opacity-0"
             defaultValue="#000000"
             onMouseLeave={(e) => {

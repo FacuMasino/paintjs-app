@@ -24,6 +24,8 @@ export default function Pixel({ defaultColor }: { defaultColor: string }) {
 
   return (
     <button
+      role="gridcell"
+      aria-label={`Pixel de la grilla ${isPainted ? "pintado" : "sin pintar"}`}
       onMouseDown={handlePaint}
       onMouseOver={handleMouseMove}
       className="border border-black transition-colors duration-150"

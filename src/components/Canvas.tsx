@@ -33,6 +33,8 @@ export default function Canvas() {
     <>
       <ColorPicker />
       <div
+        role="grid"
+        aria-label="Área de dibujo"
         className="grid border border-black"
         style={{
           gridTemplateColumns: `repeat(${TOTAL_PIXELS}, ${pixelSize}px)`,
@@ -40,6 +42,8 @@ export default function Canvas() {
         }}
       >
         {pixelsArray.map((color, index) => (
+          // Using index as key isn't a good practice but is fine for this case,
+          // because pixelsArray is not going to be rearranged or deleted
           <Pixel key={index} defaultColor={color} />
         ))}
       </div>

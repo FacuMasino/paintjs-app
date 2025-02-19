@@ -10,9 +10,9 @@ export default function App() {
       initialColor={AVAILABLE_COLORS[0]}
       availableColors={AVAILABLE_COLORS}
     >
-      <div className="flex items-center justify-center w-screen h-screen">
+      <main className="flex items-center justify-center w-screen h-screen">
         <Canvas />
-      </div>
+      </main>
     </PaintContextProvider>
   );
 }
