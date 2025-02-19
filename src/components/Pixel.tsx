@@ -1,35 +1,39 @@
 "use client";
-import { MOUSE_LEFT_BUTTON, MOUSE_RIGHT_BUTTON } from "@/consts";
+import { MOUSE_LEFT_BUTTON } from "@/consts";
 import { usePaintContext } from "@/contexts/PaintContext";
 import { useState } from "react";
 
 export default function Pixel({ defaultColor }: { defaultColor: string }) {
-  const [isPainted, setIsPainted] = useState(false);
   const paintContext = usePaintContext();
-  const [pixelColor, setPixelColor] = useState<string>(
-    paintContext.currentColor
-  );
+  const [pixelColor, setPixelColor] = useState<string>(defaultColor);
 
-  const handlePaint = (e: React.MouseEvent) => {
-    if (e.buttons === MOUSE_RIGHT_BUTTON) return;
-    if (pixelColor != paintContext.currentColor) {
-      setPixelColor(paintContext.currentColor);
+  const handleClick = () => {
+    // If the pixel color isn't the default, the user is erasing
+    if (pixelColor != defaultColor) {
+      setPixelColor(defaultColor);
+      return;
     }
-    setIsPainted(!isPainted);
+    setPixelColor(paintContext.currentColor);
   };
 
+  // Handles painting when user is dragging the mouse
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (e.buttons === MOUSE_LEFT_BUTTON) handlePaint(e);
+    if (pixelColor === paintContext.currentColor) return;
+    if (e.buttons === MOUSE_LEFT_BUTTON) {
+      setPixelColor(paintContext.currentColor);
+    }
   };
 
   return (
     <button
       role="gridcell"
-      aria-label={`Pixel de la grilla ${isPainted ? "pintado" : "sin pintar"}`}
-      onMouseDown={handlePaint}
-      onMouseOver={handleMouseMove}
+      aria-label={`Pixel de la grilla ${
+        pixelColor != defaultColor ? "pintado" : "sin pintar"
+      }`}
+      onClick={handleClick}
+      onMouseMove={handleMouseMove}
       className="border border-black transition-colors duration-150"
-      style={{ backgroundColor: isPainted ? pixelColor : defaultColor }}
+      style={{ backgroundColor: pixelColor }}
     />
   );
 }

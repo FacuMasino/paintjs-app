@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Pixel from "./Pixel";
 import ColorPicker from "./ColorPicker";
-import { TOTAL_PIXELS } from "@/consts";
+import { DEFAULT_BG_PIXEL, TOTAL_PIXELS } from "@/consts";
 
 type WindowSize = {
   width: number;
@@ -20,7 +20,7 @@ export default function Canvas() {
   const totalPixels = Math.floor(windowSize.height / pixelSize) * TOTAL_PIXELS;
 
   const pixelsArray =
-    totalPixels > 0 ? Array(totalPixels).fill("transparent") : [];
+    totalPixels > 0 ? Array(totalPixels).fill(DEFAULT_BG_PIXEL) : [];
 
   useEffect(() => {
     setWindowSize({
