@@ -65,9 +65,9 @@ export default function ColorPicker() {
             type="color"
             aria-label="Selector de color personalizado"
             className="absolute w-7 h-7 opacity-0"
-            defaultValue="#000000"
+            defaultValue={paintContext.currentColor}
             onMouseLeave={(e) => {
-              if (e.currentTarget.value != "#000000")
+              if (e.currentTarget.value != paintContext.currentColor)
                 handleColorPick({ color: e.currentTarget.value });
             }}
           />
