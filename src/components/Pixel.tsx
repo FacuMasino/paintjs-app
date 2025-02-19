@@ -1,4 +1,5 @@
 "use client";
+import { MOUSE_LEFT_BUTTON, MOUSE_RIGHT_BUTTON } from "@/consts";
 import { usePaintContext } from "@/contexts/PaintContext";
 import { useState } from "react";
 
@@ -9,20 +10,21 @@ export default function Pixel({ defaultColor }: { defaultColor: string }) {
     paintContext.currentColor
   );
 
-  const handlePaint = () => {
+  const handlePaint = (e: React.MouseEvent) => {
+    if (e.buttons === MOUSE_RIGHT_BUTTON) return;
     if (pixelColor != paintContext.currentColor) {
       setPixelColor(paintContext.currentColor);
     }
-    setIsPainted((prev) => !prev);
+    setIsPainted(!isPainted);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (e.buttons === 1) handlePaint();
+    if (e.buttons === MOUSE_LEFT_BUTTON) handlePaint(e);
   };
 
   return (
     <button
-      onClick={handlePaint}
+      onMouseDown={handlePaint}
       onMouseOver={handleMouseMove}
       className="border border-black transition-colors duration-150"
       style={{ backgroundColor: isPainted ? pixelColor : defaultColor }}
