@@ -1,5 +1,7 @@
 # PaintJS
 
+![preview](https://github.com/user-attachments/assets/d3621377-4452-45fd-abe1-db1663d0f674)
+
 This is an app developed using NextJS framework to solve a frontend test
 
 The app consists in a simple "Paint" with these features:
