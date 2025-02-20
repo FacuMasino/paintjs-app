@@ -2,12 +2,8 @@
 
 import Pippete from "@/assets/Pippete";
 import { usePaintContext } from "@/contexts/PaintContext";
+import { Coordinates } from "@/types";
 import { useEffect, useState } from "react";
-
-type Coordinates = {
-  x: number;
-  y: number;
-};
 
 export default function ColorPicker() {
   const [coordinates, setCoordinates] = useState<Coordinates>({ x: 0, y: 0 });

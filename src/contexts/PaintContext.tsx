@@ -1,25 +1,15 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useState,
-} from "react";
-
-type PaintContextType = {
-  currentColor: string;
-  availableColors: string[];
-  setCurrentColor: Dispatch<SetStateAction<string>>;
-  setAvailableColors: Dispatch<SetStateAction<string[]>>;
-};
-
-type PaintContextProviderProps = {
-  children: React.ReactNode;
-  initialColor: string;
-  availableColors: string[];
-};
+import { PaintContextType } from "@/types";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 const PaintContext = createContext<PaintContextType | undefined>(undefined);
+
+type PaintContextProviderProps = {
+  children: ReactNode;
+  /** Initial color selected for painting */
+  initialColor: string;
+  /** Available colors that will be shown in the color picker */
+  availableColors: string[];
+};
 
 export default function PaintContextProvider({
   children,
@@ -47,7 +37,7 @@ export const usePaintContext = () => {
   const context = useContext(PaintContext);
   if (context === undefined) {
     throw new Error(
-      "usePaintContext debería ser usado solo en componentes envueltos en un PaintContextProvider"
+      "usePaintContext must be used inside components wrapped by PaintContextProvider"
     );
   }
   return context;

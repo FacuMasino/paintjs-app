@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import Pixel from "./Pixel";
 import ColorPicker from "./ColorPicker";
 import { DEFAULT_BG_PIXEL, TOTAL_PIXELS } from "@/consts";
-
-type WindowSize = {
-  width: number;
-  height: number;
-};
+import { WindowSize } from "@/types";
 
 export default function Canvas() {
   const [windowSize, setWindowSize] = useState<WindowSize>({
@@ -22,6 +18,8 @@ export default function Canvas() {
   const pixelsArray =
     totalPixels > 0 ? Array(totalPixels).fill(DEFAULT_BG_PIXEL) : [];
 
+  // Browser window size is set inside a useEffect
+  // because window API isn't available before component is mounted
   useEffect(() => {
     setWindowSize({
       width: window.innerWidth,
