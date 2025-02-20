@@ -1,6 +1,6 @@
 "use client";
 
-import Pippete from "@/assets/Pippete";
+import Pipette from "@/assets/Pipette";
 import { usePaintContext } from "@/contexts/PaintContext";
 import { Coordinates } from "@/types";
 import { useEffect, useState } from "react";
@@ -66,7 +66,7 @@ export default function ColorPicker() {
           aria-label="Abre el selector de color pesonalizado"
           className="flex items-center rounded border-2 border-black hover:scale-105 transition-transform m-0.5"
         >
-          <Pippete className="w-6 h-6" />
+          <Pipette className="w-6 h-6" />
           <input
             type="color"
             aria-label="Selector de color personalizado"
